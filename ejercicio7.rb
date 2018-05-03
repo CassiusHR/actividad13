@@ -1,5 +1,3 @@
-
-
 puts "seleccionar opcion"
 puts "1 - Agregar un item (item, stock)"
 puts "2 - Quitar un item"
@@ -19,11 +17,24 @@ end
 
 if opcion == 2
   indice = 0
+  deletion_products = []
+  deletion_index = [] 
   puts "Inventario:"
   inventario.each do |k,v|
     indice += 1
     puts "#{indice}" " - " "#{k}"" #{v}"
+    deletion_products.push(k)
+    deletion_index.push(indice)
   end
-  puts "Seleccionar producto a borrar"
+  deletion_array = deletion_index.zip deletion_products
+
+  puts "Seleccionar producto a borrar:"
   opcion = gets.chomp.to_i
+  deletion_array.each do |i,k|
+    if opcion == i
+        inventario.delete(k)
+        print inventario
+    end
+  end
+  
 end
