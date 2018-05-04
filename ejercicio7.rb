@@ -38,7 +38,6 @@ if opcion == 2
   end
   puts "------------------"
   deletion_array = deletion_index.zip deletion_products
-
   puts "Seleccionar producto a borrar:"
   opcion = gets.chomp.to_i
   deletion_array.each do |i,k|
@@ -52,21 +51,45 @@ if opcion == 2
 end
 
 if opcion == 3
+  indice = 0
   puts "------------------"
   puts "Inventario actual:"
-  puts inventario
+  inventario.each do |k,v|
+    indice += 1
+    puts "#{indice}" " - " "#{k}"" #{v}"
+  end
   puts "------------------"
 end
 
 if opcion == 4
-sum_value = inventario.inject(0) { |sum, value| sum += value[1] }
-puts "------------------"
-puts "Suma de todos los productos:"
-puts sum_value
-puts "------------------"
+  sum_value = inventario.inject(0) { |sum, value| sum += value[1] }
+  puts "------------------"
+  puts "Suma de todos los productos:"
+  puts sum_value
+  puts "------------------"
 end
 
 if opcion == 5
-  
+  max_product = []  
+  max_product = inventario.max_by{|k,v| v}
+  puts "------------------"
+  puts "Producto con mayor stock:"
+  puts max_product[0].to_s + " " + max_product[1].to_s
+  puts "------------------"
 end
+
+if opcion == 6
+  puts "Buscar producto:"
+  product_search = gets.chomp.to_s
+  inventario.each do |k,v|
+    if product_search == k.to_s
+      puts "------------------"
+      puts "El producto " + '"' + product_search.to_s + '"' + " SI se encuentra, con un stock de #{v} unidades"
+      puts "------------------"
+    end
+    
+  end
+  puts 'No se encuentra el producto ' +'"'+ product_search.to_s + '"'
+end
+
 end
